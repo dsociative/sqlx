@@ -392,6 +392,12 @@ func TestFixBounds(t *testing.T) {
 			loop:   2,
 		},
 		{
+			name:   `update from select`,
+			query:  `UPDATE table_values FROM (VALUES(:a, :b, :c) v(a, b, c))`,
+			expect: `UPDATE table_values FROM (VALUES(:a, :b, :c),(:a, :b, :c) v(a, b, c))`,
+			loop:   2,
+		},
+		{
 			name: `multiline indented query`,
 			query: `INSERT INTO foo (
 		a,
